@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0b41b5aa-cd24-472b-af9f-d827c22ffa20" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Admin/Admin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Admin/AdminController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Admin/AdminRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Admin/AdminServices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Driver/Driver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Driver/DriverController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Driver/DriverRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Driver/DriverServices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Manager/Manager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Manager/ManagerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Manager/ManagerRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Manager/ManagerServices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLOT/ParkingLOT.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLOT/ParkingLOTController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLOT/ParkingLOTRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLOT/ParkingLOTServices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/Reservation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/ReservationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/ReservationRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/ReservationServices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/SmartCityParkingApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/CSED/SmatCityParing/SmatCityParingApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2qiTSJjMGs9mfhD9KIwj5KCrxwB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0b41b5aa-cd24-472b-af9f-d827c22ffa20" name="Changes" comment="" />
+      <created>1735144395408</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1735144395408</updated>
+      <workItem from="1735144397034" duration="2542000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
