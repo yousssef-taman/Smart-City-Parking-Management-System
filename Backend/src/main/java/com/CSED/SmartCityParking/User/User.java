@@ -1,19 +1,27 @@
-package com.CSED.SmartCityParking.Admin;
+package com.CSED.SmartCityParking.User;
 
+import jakarta.persistence.*;
 
-public class Admin {
-
+@Entity
+@Table(name = "users", schema = "smartparking")
+public class User {
+    @Id
     private Long id;
 
+    @Column
     private String username;
 
+    @Column
     private String password;
 
+    @Column
     private String email;
 
-    private String role = "ADMIN";
+    @Column
+    private String role;
 
-    // Getters and Setters
+
+
     public Long getId() {
         return id;
     }

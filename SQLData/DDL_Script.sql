@@ -5,78 +5,81 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema SmartParking
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema SmartParking
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `SmartParking` DEFAULT CHARACTER SET utf8 ;
+USE `SmartParking` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`User`
+-- Table `SmartParking`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`User` (
+CREATE TABLE IF NOT EXISTS `SmartParking`.`Users` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `userName` VARCHAR(45) NULL,
-  `email` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
-  `role` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
+  `userName` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `role` ENUM("admin", "driver", "manager") NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `userName_UNIQUE` (`userName` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Driver`
+-- Table `SmartParking`.`Driver`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Driver` (
+CREATE TABLE IF NOT EXISTS `SmartParking`.`Driver` (
   `License` VARCHAR(20) NOT NULL,
   `id` INT NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE INDEX `License_UNIQUE` (`License` ASC) VISIBLE,
   CONSTRAINT `id`
     FOREIGN KEY (`id`)
-    REFERENCES `mydb`.`User` (`id`)
+    REFERENCES `SmartParking`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ParkingLot`
+-- Table `SmartParking`.`ParkingLot`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`ParkingLot` (
+CREATE TABLE IF NOT EXISTS `SmartParking`.`ParkingLot` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `LotName` VARCHAR(45) NULL,
-  `Location` VARCHAR(255) NULL,
-  `capacity` INT NULL,
-  `pricingStructure` INT NULL,
+  `LotName` VARCHAR(45) NOT NULL,
+  `Location` VARCHAR(255) NOT NULL,
+  `capacity` INT NOT NULL,
+  `pricingStructure` INT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Spots`
+-- Table `SmartParking`.`Spots`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Spots` (
+CREATE TABLE IF NOT EXISTS `SmartParking`.`Spots` (
   `LotID` INT NOT NULL,
   `SpotID` INT NOT NULL AUTO_INCREMENT,
-  `Status` ENUM("occupied", "available", "reserved") NULL,
-  `type` ENUM("regular", "disabled", "EV") NULL,
-  `Price` FLOAT NULL,
+  `Status` ENUM("occupied", "available", "reserved") NOT NULL,
+  `type` ENUM("regular", "disabled", "EV") NOT NULL,
+  `Price` FLOAT NOT NULL,
   PRIMARY KEY (`SpotID`, `LotID`),
   CONSTRAINT `LotID`
     FOREIGN KEY (`LotID`)
-    REFERENCES `mydb`.`ParkingLot` (`id`)
+    REFERENCES `SmartParking`.`ParkingLot` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Reservation`
+-- Table `SmartParking`.`Reservation`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Reservation` (
+CREATE TABLE IF NOT EXISTS `SmartParking`.`Reservation` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `SpotID` INT NOT NULL,
   `LotID` INT NOT NULL,
@@ -90,32 +93,32 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Reservation` (
   INDEX `Driver_idx` (`DriverID` ASC) VISIBLE,
   CONSTRAINT `Spot`
     FOREIGN KEY (`SpotID`)
-    REFERENCES `mydb`.`Spots` (`SpotID`)
+    REFERENCES `SmartParking`.`Spots` (`SpotID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Lot`
     FOREIGN KEY (`LotID`)
-    REFERENCES `mydb`.`ParkingLot` (`id`)
+    REFERENCES `SmartParking`.`ParkingLot` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Driver`
     FOREIGN KEY (`DriverID`)
-    REFERENCES `mydb`.`Driver` (`id`)
+    REFERENCES `SmartParking`.`Driver` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Penalities`
+-- Table `SmartParking`.`Penalities`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Penalities` (
+CREATE TABLE IF NOT EXISTS `SmartParking`.`Penalities` (
   `ReservationID` INT NOT NULL,
   `PenalityFee` FLOAT NULL,
   PRIMARY KEY (`ReservationID`),
   CONSTRAINT `ReservationID`
     FOREIGN KEY (`ReservationID`)
-    REFERENCES `mydb`.`Reservation` (`ID`)
+    REFERENCES `SmartParking`.`Reservation` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
