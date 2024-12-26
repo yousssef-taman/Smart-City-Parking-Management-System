@@ -21,11 +21,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
                     @Param("role") String role);
 
 
-    @Query(value = "SELECT * FROM users", nativeQuery = true)
-    List<User> findAllUsers();
+    @Query(value = "SELECT users.id ,username , `password` , email , `role` , license FROM users left join driver on users.id = driver.id ", nativeQuery = true)
+    List<UserAndDriver> findAllUsers();
 
-    @Query(value = "SELECT * FROM users WHERE id = :id", nativeQuery = true)
-    User findUserById(@Param("id") Long id);
 
     @Query(value = "UPDATE users SET username = :username, password = :password, email = :email , role = :role WHERE id = :id", nativeQuery = true)
     @Modifying
@@ -56,5 +54,16 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT License FROM driver WHERE id = :id", nativeQuery = true)
     String findDriverByID(@Param("id") Long id);
+
+
+    @Query(value = "SELECT users.id,username , `password` , email , `role` , license FROM users left join driver on users.id = driver.id " +
+            "where users.id = :id;", nativeQuery = true)
+    UserAndDriver findUserAndDriverByID(@Param("id") Long id);
+
+
+    @Query(value = "UPDATE driver SET License = :license WHERE id = :id;", nativeQuery = true)
+    @Modifying
+    @Transactional
+    void updateDriver(@Param("id") Long id , @Param("license") String license);
 }
 

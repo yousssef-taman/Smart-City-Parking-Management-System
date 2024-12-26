@@ -2,7 +2,7 @@ package com.CSED.SmartCityParking.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.servlet.View;
+
 
 import java.util.List;
 
@@ -13,52 +13,45 @@ public class UserServices {
     private UserRepository userRepository;
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-    @Autowired
-    private View error;
 
-    public Object createUser(Separator separator) {
-        User user = separator.getUser();
-        user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.createUser(user.getUsername() , user.getPassword(), user.getEmail() , user.getRole());
+
+    public UserAndDriver createUser(UserAndDriver userAndDriver) {
+        String EncryptedPassword = encoder.encode(userAndDriver.getPassword());
+        userRepository.createUser(userAndDriver.getUsername() , EncryptedPassword, userAndDriver.getEmail() , userAndDriver.getRole());
         Long currentID = userRepository.getLastInsertId();
-        user.setId(currentID);
-        if (user.getRole().equals("driver"))
+        if (userAndDriver.getRole().equals("driver"))
         {
-            if (separator.getLicense() == null)
+            if (userAndDriver.getLicense() == null)
             {
                 deleteUser(currentID);
                 throw new IllegalArgumentException ("License is null");
             }
             else
             {
-                userRepository.createDriver(currentID , separator.getLicense());
-                separator.setLicense(userRepository.findDriverByID(currentID));
-                separator.setUser(user);
-                return separator;
+                userRepository.createDriver(currentID , userAndDriver.getLicense());
+                return userRepository.findUserAndDriverByID(currentID);
             }
-
         }
-        else return user;
+
+        else return userRepository.findUserAndDriverByID(currentID);
     }
 
 
-    public List<User> getAllUsers() {
+    public List<UserAndDriver> getAllUsers() {
         return userRepository.findAllUsers();
     }
 
 
-    public User getUserById(Long id) {
-        return userRepository.findUserById(id);
-    }
-
-    public String getDriverByID(Long id) {
-        return userRepository.findDriverByID(id);
+    public UserAndDriver getUserById(Long id) {
+        return userRepository.findUserAndDriverByID(id);
     }
 
 
-    public User updateUser(Long id, User userDetails) {
+
+    public UserAndDriver updateUser(Long id, UserAndDriver userDetails) {
         userRepository.updateUser(id , userDetails.getUsername(),userDetails.getPassword(), userDetails.getEmail() , userDetails.getRole());
-        return userRepository.findUserById(id);
+        userRepository.updateDriver(id , userDetails.getLicense());
+        return userRepository.findUserAndDriverByID(id);
     }
 
 

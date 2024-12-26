@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,23 +19,21 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<Object> createUser(@RequestBody Separator separator) {
+    public ResponseEntity<?> createUser(@RequestBody UserAndDriver userAndDriver) {
         try{
-            Object NewUser = userServices.createUser(separator);
+            UserAndDriver NewUser = userServices.createUser(userAndDriver);
             return ResponseEntity.ok(NewUser);
         } catch (DataIntegrityViolationException e) {
-            // Handle cases like unique constraint violations (e.g., duplicate username)
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("Username or email already exists. Please choose a different one.");
+                    .body("Constraint violation");
 
         }
         catch (IllegalArgumentException e)
         {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("License cann't be null");
+                    .body("License can't be null");
         }
         catch (Exception e) {
-            // General fallback for other unexpected errors
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("An unexpected error occurred. Please try again later.");
         }
@@ -44,42 +41,35 @@ public class UserController {
 
 
     @GetMapping
-    public Object getAllUsers() {
-        List<User>  RetrivedUsers = new ArrayList<>(userServices.getAllUsers());
+    public ResponseEntity<?> getAllUsers() {
+        List<UserAndDriver>  RetrivedUsers = userServices.getAllUsers();
         if (RetrivedUsers.isEmpty() ) {
             return ResponseEntity.noContent().build();
         }else
-            return RetrivedUsers;
+            return ResponseEntity.ok(RetrivedUsers);
     }
 
 
     @GetMapping("/{id}")
-    public Object getUserById(@PathVariable Long id) {
-         User RetrivedUser = userServices.getUserById(id);
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+        UserAndDriver RetrivedUser = userServices.getUserById(id);
          if (RetrivedUser == null) {
              return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-         }
-         else if(RetrivedUser.getRole().equals("driver"))
-         {
-             Separator separator = new Separator();
-             separator.setUser(RetrivedUser);
-             separator.setLicense(userServices.getDriverByID(RetrivedUser.getId()));
-             return ResponseEntity.ok(separator);
          }
          else return ResponseEntity.ok(RetrivedUser);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    public ResponseEntity<UserAndDriver> updateUser(@PathVariable Long id, @RequestBody UserAndDriver userDetails) {
         return ResponseEntity.ok(userServices.updateUser(id, userDetails));
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-        User newUser = userServices.getUserById(id);
-        if (newUser == null) {
+        UserAndDriver UserDelete = userServices.getUserById(id);
+        if (UserDelete == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
         else userServices.deleteUser(id);
