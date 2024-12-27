@@ -6,10 +6,12 @@ import Navbar from "./Components/Navbar.jsx";
 import Footer from "./Components/Footer.jsx";
 import LoginForm from "./Auth/LoginForm.jsx";
 import {ParkingLotProfiles} from "./Parking Lot Management/ParkingLotProfiles.jsx";
-import {Reservations} from "./reservations/Reservations.jsx";
 import {DriverProfile} from "./profiles/DriverProfile.jsx";
+import {ReservationManagement} from "./reservations/ReservationManagement.jsx";
+import {initialReservations} from "./data/mockData.js";
 
 function App() {
+
     return (
         <Router>
             <Navbar/>
@@ -18,7 +20,7 @@ function App() {
                 <Route path="/signup" element={<SignUpForm />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/ParkingLotManagement" element={<ParkingLotProfiles />} />
-                <Route path="/reservations" element={<Reservations />} />
+                <Route path="/reservations" element={<ReservationManagement reservations={initialReservations}  />} />
                 <Route path="/profile" element={<DriverProfile />} />
 
             </Routes>

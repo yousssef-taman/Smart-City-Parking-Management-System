@@ -113,8 +113,8 @@ export default function SignUpForm() {
                         onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                     >
                         <option value="Driver">Driver</option>
-                        <option value="Parking Lot Manager">Parking Lot Manager</option>
-                        <option value="Administrator">Administrator</option>
+                        <option value="Manager">Parking Lot Manager</option>
+                        <option value="Admin">Administrator</option>
                     </select>
                 </div>
                 <div>
