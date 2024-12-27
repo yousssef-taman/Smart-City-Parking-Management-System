@@ -30,8 +30,8 @@ public class ParkingLotController {
     }
 
     @PostMapping
-    public void createParkingLot(@RequestBody ParkingLot parkingLot) {
-         parkingLotService.saveParkingLot(parkingLot);
+    public Integer createParkingLot(@RequestBody ParkingLot parkingLot) {
+         return parkingLotService.saveParkingLot(parkingLot);
     }
 
     @DeleteMapping("/{id}")

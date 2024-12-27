@@ -20,9 +20,11 @@ public class ParkingLotService {
         return parkingLotRepository.findAll();
     }
 
-    public void saveParkingLot(ParkingLot parkingLot) {
+    public Integer saveParkingLot(ParkingLot parkingLot) {
         parkingLotRepository.createLot(parkingLot.getLotName(), parkingLot.getLocation(), parkingLot.getCapacity()
-                , parkingLot.getPricingStructure() , parkingLot.getManagerId());
+                , parkingLot.getPricingStructure(), parkingLot.getManagerId(),
+                parkingLot.getStartPeekTime(), parkingLot.getEndPeekTime(), parkingLot.getPriceMultiplier());
+        return this.parkingLotRepository.getLastInsertId();
     }
 
     public Optional<ParkingLot> getParkingLotById(Integer id) {
