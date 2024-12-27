@@ -24,7 +24,8 @@ export function useAuth() {
                 body: JSON.stringify(body),
             });
             if (!response.ok) throw new Error('Invalid email, password, or role');
-            localStorage.setItem('user', JSON.stringify(body));
+            const data = await response.json();
+            localStorage.setItem('user', JSON.stringify(data));
         } catch (err) {
             console.log(err);
             throw err;

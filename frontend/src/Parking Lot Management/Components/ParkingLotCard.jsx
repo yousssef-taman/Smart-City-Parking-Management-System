@@ -20,7 +20,7 @@ export function ParkingLotCard({ parkingLot, onSelect, onUpdate, onDelete  }) {
                         <span className="text-sm">{parkingLot.location}</span>
                     </div>
                 </div>
-                {currentUser.role === 'Manager' && (
+                {currentUser.role === 'manager' && (
                     <div className="flex space-x-2">
                         <button
                             onClick={() => onUpdate(parkingLot)}
