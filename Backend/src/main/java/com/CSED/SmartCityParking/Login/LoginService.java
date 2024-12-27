@@ -12,9 +12,14 @@ public class LoginService {
     private LoginRepository loginRepository;
 
 
-    public UserAndDriver getUserByUserName (User user) {
+    public UserAndDriver getUserByUserName(User user) {
         UserAndDriver RetrivedUser = loginRepository.findUserAndDriverByUserName(user.getUsername());
         return RetrivedUser;
-        }
     }
 
+    public UserAndDriver getUserByEmail(User user) {
+        UserAndDriver RetrivedUser = loginRepository.findUserAndDriverByEmail(user.getEmail());
+        return RetrivedUser;
+    }
+
+}

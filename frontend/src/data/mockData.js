@@ -17,7 +17,7 @@ export const initialParkingLots = [
         spots: Array(115).fill(null).map((_, index) => ({
             id: `spot-${index + 1}`,
             type: index < 100 ? 'regular' : index < 110 ? 'disabled' : 'ev',
-            status: Math.random() > 0.7 ? 'occupied' : 'available',
+            status: Math.random() > 0.7 ? 'occupied' : Math.random() > 0.5 ? 'available' : 'reserved',
             floor: Math.floor(index / 20) + 1,
             spotNumber: `${Math.floor(index / 20) + 1}-${(index % 20) + 1}`,
         })),
