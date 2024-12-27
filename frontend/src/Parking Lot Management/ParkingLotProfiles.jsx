@@ -46,11 +46,9 @@ export const ParkingLotProfiles = () => {
             peakMultiplier: lotData.peakMultiplier,
         }
         lotid = createLot(lot);
-        const spots = {
-            lotId: lotid,
-            regular: lotData.capacity.regular,
-            disabled: lotData.capacity.disabled,
-            ev: lotData.capacity.ev,
+        const regularSpots = {
+            lot_id: lotid,
+            type: 1,
         }
         console.log(lot);
         createLot(lot);
