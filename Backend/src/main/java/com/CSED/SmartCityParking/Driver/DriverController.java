@@ -14,11 +14,8 @@ import java.util.Optional;
 @RequestMapping("/api/driver")
 public class DriverController {
 
-    private final DriverServices driverServices;
-
-    public DriverController(DriverServices driverServices) {
-        this.driverServices = driverServices;
-    }
+    @Autowired
+    private DriverServices driverServices;
 
 
     @GetMapping("/{DriverID}")

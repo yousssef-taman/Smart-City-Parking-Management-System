@@ -1,5 +1,6 @@
 package com.CSED.SmartCityParking.Reservation;
 
+import com.CSED.SmartCityParking.Enums.ReservationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,19 +10,15 @@ import java.util.Optional;
 @Service
 public class ReservationService {
 
-    private final ReservationRepository reservationRepository;
-
     @Autowired
-    public ReservationService(ReservationRepository reservationRepository) {
-        this.reservationRepository = reservationRepository;
-    }
+    private ReservationRepository reservationRepository;
 
     public List<Reservation> getAllReservations() {
         return reservationRepository.findAll();
     }
 
-    public Optional<Reservation> getReservationById(Integer id) {
-        return reservationRepository.findById(id);
+    public Reservation getReservationById(Integer id) {
+        return reservationRepository.getReservationById(id);
     }
 
     public Reservation saveReservation(Reservation reservation) {
@@ -29,7 +26,18 @@ public class ReservationService {
     }
 
     public void deleteReservation(Integer id) {
-        reservationRepository.deleteById(id);
+        reservationRepository.deleteReservationByID(id);
+    }
+
+    public List<Reservation> getAllReservationsByManager(Integer id)
+    {
+        return reservationRepository.getReservationByManagerID(id);
+    }
+
+    public Reservation updateReservationStatus(Integer reservationID, ReservationStatus reservationStatus)
+    {
+        reservationRepository.updateReservationStatus(reservationID,reservationStatus);
+         return reservationRepository.getReservationById(reservationID);
     }
 }
 

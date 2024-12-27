@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="aa177991-4044-48b9-a5c4-17c08686595f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Backend.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Driver/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Driver/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Driver/DriverController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Driver/DriverController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Driver/DriverRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Driver/DriverRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Driver/DriverServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Driver/DriverServices.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Login/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Login/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Login/LoginRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Login/LoginRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Login/LoginService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Login/LoginService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/ParkingLOT/ParkingLOT.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/ParkingLOT/ParkingLOT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/ParkingLOT/ParkingLOTController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/ParkingLOT/ParkingLOTController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/ParkingLOT/ParkingLotService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/ParkingLOT/ParkingLotService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Reservation/Reservation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Reservation/Reservation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Reservation/ReservationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Reservation/ReservationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Reservation/ReservationRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Reservation/ReservationRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Reservation/ReservationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Reservation/ReservationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Reservation/ReservationStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Spot/Spot$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Spot/Spot$Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Spot/Spot$Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Spot/Spot$Type.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Spot/Spot.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Spot/Spot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Spot/SpotController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/Spot/SpotController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/User/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/CSED/SmartCityParking/User/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Driver/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Driver/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Driver/DriverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Driver/DriverController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Driver/DriverServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Driver/DriverServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLot/ParkingLot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLot/ParkingLot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLot/ParkingLotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLot/ParkingLotController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLot/ParkingLotRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLot/ParkingLotRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLot/ParkingLotService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/ParkingLot/ParkingLotService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/ReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/ReservationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/Reservation/ReservationStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/User/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSED/SmartCityParking/User/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQLData/DDL_Script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../SQLData/DDL_Script.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQLData/EER_Diagram.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/../SQLData/EER_Diagram.mwb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQLData/EER_Diagram.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/../SQLData/EER_Diagram.mwb.bak" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2qmYIVPIHB0kIvEcnH055zsqPSK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build Backend.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.SmartCityParkingApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="SmartCityParkingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="SmartCityParking.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.CSED.SmartCityParking.SmartCityParkingApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aa177991-4044-48b9-a5c4-17c08686595f" name="Changes" comment="" />
+      <created>1735269138455</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1735269138455</updated>
+      <workItem from="1735269139976" duration="5620000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

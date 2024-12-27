@@ -1,4 +1,5 @@
 package com.CSED.SmartCityParking.Reservation;
+import com.CSED.SmartCityParking.Enums.ReservationStatus;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -6,35 +7,31 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-
-
-@Entity
-@Table(name = "reservation", schema = "smartparking")
 @Setter
 @Getter
+@Entity
+@Table(name = "reservation", schema = "smartparking")
 public class Reservation {
 
     @Id
     private Integer ID;
 
-    @Column(name = "SpotID")
+    @Column(name = "spot_id")
     private Integer SpotID;
 
-    @Column(name = "LotID")
+    @Column(name = "lot_id")
     private Integer LotID;
 
-    @Column(name = "DriverID")
+    @Column(name = "driver_id")
     private Integer DriverID;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ReservationStatus")
+    @Column(name = "reservation_status")
     private ReservationStatus reservationStatus;
 
-    @Column(name = "ReservationHours")
+    @Column(name = "reservation_hours")
     private Integer reservationHours;
 
-    @Column(name = "ReservationTime")
+    @Column(name = "reservation_time")
     private LocalDateTime reservationTime;
 }
-
-

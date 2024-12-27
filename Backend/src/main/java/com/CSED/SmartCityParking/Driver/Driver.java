@@ -17,6 +17,6 @@ public class Driver {
     @Id
     private Integer id;
 
-    @Column(name = "license")
+    @Column
     private String license;
 }

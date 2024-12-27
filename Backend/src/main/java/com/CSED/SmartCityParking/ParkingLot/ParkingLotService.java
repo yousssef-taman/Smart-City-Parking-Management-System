@@ -9,12 +9,9 @@ import java.util.Optional;
 @Service
 public class ParkingLotService {
 
-    private final ParkingLotRepository parkingLotRepository;
-
     @Autowired
-    public ParkingLotService(ParkingLotRepository parkingLotRepository) {
-        this.parkingLotRepository = parkingLotRepository;
-    }
+    private ParkingLotRepository parkingLotRepository;
+
 
     public List<ParkingLot> getAllParkingLots() {
         return parkingLotRepository.findAll();

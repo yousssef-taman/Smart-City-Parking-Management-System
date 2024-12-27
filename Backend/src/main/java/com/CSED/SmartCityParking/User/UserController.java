@@ -13,12 +13,8 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserController {
 
-    private final UserServices userServices;
-
-
-    public UserController(UserServices userServices) {
-        this.userServices = userServices;
-    }
+    @Autowired
+    private UserServices userServices;
 
 
     @PostMapping

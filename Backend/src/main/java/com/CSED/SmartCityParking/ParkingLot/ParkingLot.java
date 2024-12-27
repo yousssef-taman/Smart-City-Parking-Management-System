@@ -8,24 +8,26 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "ParkingLot", schema = "smartparking")
+@Table(name = "parking_lot", schema = "smartparking")
 @Setter
 @Getter
 public class ParkingLot {
 
     @Id
-    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "LotName")
+    @Column
+    private Integer manager_id;
+
+    @Column
     private String lotName;
 
-    @Column(name = "Location")
+    @Column
     private String location;
 
-    @Column(name = "Capacity")
+    @Column
     private Integer capacity;
 
-    @Column(name = "PricingStructure")
+    @Column
     private Integer pricingStructure;
 }
