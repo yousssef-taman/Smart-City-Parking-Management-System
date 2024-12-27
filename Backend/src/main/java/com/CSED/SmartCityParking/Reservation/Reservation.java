@@ -6,10 +6,6 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-enum ReservationStatus {
-    ACCEPTED,
-    REJECTED
-}
 
 
 @Entity

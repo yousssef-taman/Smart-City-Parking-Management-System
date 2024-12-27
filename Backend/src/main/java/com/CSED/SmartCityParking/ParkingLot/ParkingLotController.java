@@ -17,7 +17,6 @@ public class ParkingLotController {
 
     private final ParkingLotService parkingLotService;
 
-    @Autowired
     public ParkingLotController(ParkingLotService parkingLotService) {
         this.parkingLotService = parkingLotService;
     }

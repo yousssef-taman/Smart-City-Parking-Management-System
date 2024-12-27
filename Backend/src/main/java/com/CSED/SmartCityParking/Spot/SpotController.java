@@ -12,10 +12,10 @@ public class SpotController {
 
     private final SpotService spotService;
 
-    @Autowired
     public SpotController(SpotService spotService) {
         this.spotService = spotService;
     }
+
 
     @GetMapping
     public List<Spot> getAllSpots() {

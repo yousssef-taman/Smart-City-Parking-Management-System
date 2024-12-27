@@ -1,9 +1,13 @@
 package com.CSED.SmartCityParking.Spot;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "spot" , schema = "smartparking")
+@Setter
+@Getter
 public class Spot {
 
     @Id
