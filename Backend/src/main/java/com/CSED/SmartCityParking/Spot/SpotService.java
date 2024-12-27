@@ -18,7 +18,9 @@ public class SpotService {
     }
 
 
-    public void saveSpot(Spot spot) {
-        this.spotRepository.createSpot(spot.getLotId() , spot.getStatus() , spot.getType() , spot.getPrice());
+    public void saveSpot(Spot spot, Integer capacity) {
+        for (int i = 0; i < capacity; i++) {
+            this.spotRepository.createSpot(spot.getLotId(), spot.getStatus(), spot.getType(), spot.getPrice());
+        }
     }
 }

@@ -17,13 +17,14 @@ public interface ParkingLotRepository extends JpaRepository<ParkingLot, Integer>
     @Transactional
     @Query(
             nativeQuery = true,
-            value = "INSERT INTO SmartParking.parking_lot(lot_name, location, capacity,pricing_structure) " +
-                    "VALUES(:lotName, :location, :capacity, :pricing)"
+            value = "INSERT INTO SmartParking.parking_lot(lot_name, location, capacity,pricing_structure,manager_id) " +
+                    "VALUES(:lotName, :location, :capacity, :pricing ,  :managerId)"
     )
     void createLot(@Param("lotName") String lotName,
                    @Param("location") String location,
                    @Param("capacity") Integer capacity,
-                   @Param("pricing") Integer pricing);
+                   @Param("pricing") Integer pricing,
+                   @Param("managerId") Integer manager_id);
 
 
       @Query(

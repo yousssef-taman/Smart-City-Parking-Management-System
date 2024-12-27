@@ -28,4 +28,8 @@ public class ParkingLot {
 
     @Column(name = "pricing_structure")
     private Integer pricingStructure;
+
+
+    @Column(name = "manager_id")
+    private Integer managerId ;
 }

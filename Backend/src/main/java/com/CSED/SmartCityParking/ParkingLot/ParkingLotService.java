@@ -22,7 +22,7 @@ public class ParkingLotService {
 
     public void saveParkingLot(ParkingLot parkingLot) {
         parkingLotRepository.createLot(parkingLot.getLotName(), parkingLot.getLocation(), parkingLot.getCapacity()
-                , parkingLot.getPricingStructure());
+                , parkingLot.getPricingStructure() , parkingLot.getManagerId());
     }
 
     public Optional<ParkingLot> getParkingLotById(Integer id) {

@@ -32,12 +32,14 @@ public class Spot {
     public enum Status {
         OCCUPIED,
         AVAILABLE,
-        RESERVED
+        RESERVED ,
+        NULL
     }
 
     public enum Type {
         REGULAR,
         DISABLED,
-        EV
+        EV,
+        NULL
     }
 }
