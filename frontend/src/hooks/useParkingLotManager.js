@@ -1,6 +1,6 @@
 
 export function useParkingLotManager() {
-    const createLot = async (lotData,slots) => {
+    const createLot = async (lotData) => {
         try {
             const response = await fetch('http://localhost:8080/api/parkinglots', {
                 method: 'POST',
@@ -8,7 +8,10 @@ export function useParkingLotManager() {
                 body: JSON.stringify(lotData),
             });
             if (!response.ok) throw new Error('Failed to create parking lot');
-            return await response.json();
+            data = JSON.parse(response.body);
+            console.log(data);
+            console.log(typeof data);
+            return data;
         } catch (err) {
             console.error(err);
             throw err;

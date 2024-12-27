@@ -4,9 +4,11 @@ import { ParkingLotDetails } from './components/ParkingLotDetails';
 import { initialParkingLots } from '../data/mockData';
 import {Building, Plus} from 'lucide-react';
 import {ParkingLotForm} from "./Components/ParkingLotForm.jsx";
+import {useParkingLotManager} from "../hooks/useParkingLotManager";
 
 export const ParkingLotProfiles = () => {
     const currentUser = JSON.parse(localStorage.getItem('user'));
+    const {createLot , updateLot, deleteLot} = useParkingLotManager();
     const [selectedLot, setSelectedLot] = useState(null);
     const [parkingLots, setParkingLots] = useState(initialParkingLots);
 
@@ -31,7 +33,27 @@ export const ParkingLotProfiles = () => {
     console.log(parkingLots);
         console.log(lotData);
         Create(lotData);
+
         setIsCreating(false);
+        const lot = {
+            lotName: lotData.name,
+            location: lotData.location,
+            capacity: lotData.spots.length,
+            pricingStructure: lotData.basePrice,
+            managerId: currentUser.id,
+            startPeakTime: lotData.peakHours.start,
+            endPeakTime: lotData.peakHours.end,
+            peakMultiplier: lotData.peakMultiplier,
+        }
+        lotid = createLot(lot);
+        const spots = {
+            lotId: lotid,
+            regular: lotData.capacity.regular,
+            disabled: lotData.capacity.disabled,
+            ev: lotData.capacity.ev,
+        }
+        console.log(lot);
+        createLot(lot);
     };
     const handleUpdate = (lotData) => {
         Update({ ...lotData, id: editingLot.id });
