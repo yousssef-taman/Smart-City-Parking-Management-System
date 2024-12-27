@@ -9,8 +9,9 @@ export default function SignUpForm() {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-        name: '',
-        role: 'Driver'
+        username: '',
+        role: 'Driver',
+        license: '',
     });
     const [error, setError] = useState('');
 
@@ -26,7 +27,7 @@ export default function SignUpForm() {
         }
         try {
             await signUp(formData);
-            navigate('/');
+            navigate('/login');
         } catch (err) {
             if (err.message.includes('email already used')) {
                 setError('Email is already used');
@@ -52,8 +53,8 @@ export default function SignUpForm() {
                         type="text"
                         required
                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        value={formData.username}
+                        onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                     />
                 </div>
                 <div>
@@ -84,6 +85,21 @@ export default function SignUpForm() {
                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     />
                 </div>
+                <div>
+                    <label htmlFor="license" className="block text-sm font-medium text-gray-700">
+                        License Plate
+                    </label>
+                    <input
+                        id="license"
+                        name="license"
+                        type="text"
+                        required
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        value={formData.license}
+                        onChange={(e) => setFormData({...formData, license: e.target.value })}
+                    />
+                </div>
+
                 <div>
                     <label htmlFor="role" className="block text-sm font-medium text-gray-700">
                         Role

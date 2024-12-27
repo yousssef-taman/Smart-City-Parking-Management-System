@@ -7,9 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import com.CSED.SmartCityParking.User.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/login")
 public class LoginController {
 
@@ -17,16 +18,15 @@ public class LoginController {
     private LoginService loginService;
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
     @PostMapping
-    ResponseEntity<?> validate(@RequestBody User user)
-    {
-        UserAndDriver temp = loginService.getUserByUserName(user);
-        if (temp != null)
-        {
-            return encoder.matches(user.getPassword(),temp.getPassword()) ? ResponseEntity.ok(temp):
+    ResponseEntity<?> validate(@RequestBody User user) {
+        UserAndDriver temp = loginService.getUserByEmail(user);
+        if (temp != null) {
+            return encoder.matches(user.getPassword(), temp.getPassword()) ? ResponseEntity.ok(temp) :
                     ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                             .body("Wrong Password");
-        }else {
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Username is not found");
         }

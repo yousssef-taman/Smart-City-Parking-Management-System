@@ -25,7 +25,7 @@ export default function LoginForm() {
         }
         try {
             await login(formData);
-            navigate('/dashboard');
+            navigate('/profile');
         } catch (err) {
             setError('Invalid email, password');
         }

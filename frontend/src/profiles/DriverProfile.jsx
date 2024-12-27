@@ -23,7 +23,14 @@ export function DriverProfile() {
             }
         };
 
-        fetchProfile();
+        // fetchProfile();
+        const user = localStorage.getItem('user');
+        console.log("user",user);
+        if (!user) {
+            alert('You must be logged in to view your profile');
+            return;
+        }
+        setProfile(JSON.parse(user));
     }, []);
 
     if (!profile) {
@@ -43,7 +50,7 @@ export function DriverProfile() {
                     <div className="flex items-center mb-6">
                         <User className="w-12 h-12 text-blue-600 mr-4"/>
                         <div>
-                            <h2 className="text-2xl font-bold">{profile.name || "kamal"}</h2>
+                            <h2 className="text-2xl font-bold">{profile.email || "kamal"}</h2>
                             <p className="text-gray-600">{profile.email || "kamal@emample.com"}</p>
                         </div>
                     </div>
@@ -52,7 +59,7 @@ export function DriverProfile() {
                             <Car className="w-6 h-6 text-gray-600 mr-3"/>
                             <div>
                                 <p className="text-sm text-gray-600">License Plate</p>
-                                <p className="font-medium">{profile.licensePlate}</p>
+                                <p className="font-medium">{}</p>
                             </div>
                         </div>
 
@@ -60,7 +67,7 @@ export function DriverProfile() {
                             <CreditCard className="w-6 h-6 text-gray-600 mr-3"/>
                             <div>
                                 <p className="text-sm text-gray-600">Payment Method</p>
-                                <p className="font-medium">•••• •••• •••• {profile.paymentLast4}</p>
+                                <p className="font-medium">•••• •••• •••• {}</p>
                             </div>
                         </div>
                     </div>

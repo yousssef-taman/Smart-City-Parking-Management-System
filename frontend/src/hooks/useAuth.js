@@ -1,9 +1,9 @@
 
 export function useAuth() {
-    const signUp = async ({ email, password, name, role }) => {
+    const signUp = async ({ email, password, username, role,license }) => {
         try {
-            const body = { email, password, name, role };
-            const response = await fetch('http://localhost:8080/auth/signup', {
+            const body = { username, password ,email, role,license };
+            const response = await fetch('http://localhost:8080/api/user', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
@@ -18,12 +18,13 @@ export function useAuth() {
     const login = async ({ email, password, role }) => {
         try {
             const body = { email, password, role };
-            const response = await fetch('http://localhost:8080/auth/login', {
+            const response = await fetch('http://localhost:8080/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
             });
             if (!response.ok) throw new Error('Invalid email, password, or role');
+            localStorage.setItem('user', JSON.stringify(body));
         } catch (err) {
             console.log(err);
             throw err;
