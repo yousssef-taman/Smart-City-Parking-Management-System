@@ -25,8 +25,8 @@ public class Spot {
     @Column(name = "type", nullable = false)
     private Type type;
 
-    @Column(name = "price", nullable = false)
-    private Float price;
+//    @Column(name = "price", nullable = false)
+//    private Float price;
 
 
     public enum Status {

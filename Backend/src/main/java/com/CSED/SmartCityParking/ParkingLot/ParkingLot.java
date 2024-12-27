@@ -27,9 +27,18 @@ public class ParkingLot {
     private Integer capacity;
 
     @Column(name = "pricing_structure")
-    private Integer pricingStructure;
+    private Float pricingStructure;
 
 
     @Column(name = "manager_id")
-    private Integer managerId ;
+    private Integer managerId;
+
+    @Column(name = "start_peek_time")
+    private Integer startPeekTime;
+
+    @Column(name = "end_peek_time")
+    private Integer endPeekTime;
+
+    @Column(name = "price_multiplier")
+    private Integer priceMultiplier ;
 }
