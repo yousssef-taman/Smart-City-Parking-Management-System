@@ -50,18 +50,25 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SmartParking`.`ParkingLot` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `ManagerID` INT NULL,
   `LotName` VARCHAR(45) NOT NULL,
   `Location` VARCHAR(255) NOT NULL,
   `capacity` INT NOT NULL,
   `pricingStructure` INT NOT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  INDEX `ManagerLotID_idx` (`ManagerID` ASC) VISIBLE,
+  CONSTRAINT `ManagerLotID`
+    FOREIGN KEY (`ManagerID`)
+    REFERENCES `SmartParking`.`Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SmartParking`.`Spots`
+-- Table `SmartParking`.`Spot`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SmartParking`.`Spots` (
+CREATE TABLE IF NOT EXISTS `SmartParking`.`Spot` (
   `LotID` INT NOT NULL,
   `SpotID` INT NOT NULL AUTO_INCREMENT,
   `Status` ENUM("occupied", "available", "reserved") NOT NULL,
@@ -93,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`Reservation` (
   INDEX `Driver_idx` (`DriverID` ASC) VISIBLE,
   CONSTRAINT `Spot`
     FOREIGN KEY (`SpotID`)
-    REFERENCES `SmartParking`.`Spots` (`SpotID`)
+    REFERENCES `SmartParking`.`Spot` (`SpotID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Lot`
