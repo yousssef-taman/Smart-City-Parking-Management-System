@@ -1,11 +1,11 @@
 package com.CSED.SmartCityParking.User;
+import com.CSED.SmartCityParking.ParkingLot.ParkingLot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 
 @RestController
@@ -73,6 +73,16 @@ public class UserController {
         }
         else userServices.deleteUser(id);
         return ResponseEntity.ok("User "+id+" deleted successfully!");
+    }
+
+
+    @GetMapping("searchLot")
+    public ResponseEntity<List<ParkingLot>> getLots(@Param(value = "location") String location) {
+        List<ParkingLot> lots = this.userServices.searchLot(location);
+        if (lots == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(lots, HttpStatus.OK);
     }
 }
 

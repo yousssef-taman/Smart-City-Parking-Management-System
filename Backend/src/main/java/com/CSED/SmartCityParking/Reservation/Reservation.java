@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Entity
-@Table(name = "reservation", schema = "smartparking")
+@Table(name = "reservation")
 public class Reservation {
 
     @Id
@@ -35,3 +35,5 @@ public class Reservation {
     @Column(name = "reservation_time")
     private LocalDateTime reservationTime;
 }
+
+

@@ -1,5 +1,6 @@
 package com.CSED.SmartCityParking.User;
 
+import com.CSED.SmartCityParking.ParkingLot.ParkingLot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -65,5 +66,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Transactional
     void updateDriver(@Param("id") Long id , @Param("license") String license);
+
+
+
+
+
+
 }
 

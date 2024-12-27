@@ -1,6 +1,8 @@
 package com.CSED.SmartCityParking.Spot;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,25 +17,16 @@ public class SpotController {
     public SpotController(SpotService spotService) {
         this.spotService = spotService;
     }
-
-
-    @GetMapping
-    public List<Spot> getAllSpots() {
-        return spotService.getAllSpots();
+    @PostMapping("/create")
+    public ResponseEntity<String> createSpot(@RequestBody Spot spot) {
+        try {
+            System.out.println(spot.getStatus());
+            System.out.println(spot.getType());
+            spotService.saveSpot(spot) ;
+            return ResponseEntity.status(HttpStatus.CREATED).body("Spot created successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+        }
     }
 
-    @GetMapping("/{id}")
-    public Optional<Spot> getSpotById(@PathVariable("id") Integer id) {
-        return spotService.getSpotById(id);
-    }
-
-    @PostMapping
-    public Spot createSpot(@RequestBody Spot spot) {
-        return spotService.saveSpot(spot);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteSpot(@PathVariable("id") Integer id) {
-        spotService.deleteSpot(id);
-    }
 }

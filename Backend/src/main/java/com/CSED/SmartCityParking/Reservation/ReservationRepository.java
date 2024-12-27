@@ -29,10 +29,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     Integer getLastInsertId();
 
 
-    @Query(value = "SELECT * FROM reservation WHERE id = :id", nativeQuery = true)
-    Reservation getReservationById(@Param("id") Integer id);
-
-
     @Query(value = "SELECT r.* FROM" +
             " parking_lot as p join reservation as r on p.id = r.lot_id where p.manager_id = :id ;", nativeQuery = true)
     List<Reservation> getReservationByManagerID(@Param("id") Integer id);
@@ -47,4 +43,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     @Modifying
     @Transactional
     void deleteReservationByID(@Param("id") Integer id);
+    @Query(value = "SELECT * FROM reservation WHERE ID = :id", nativeQuery = true)
+    Reservation getReservationById(Integer id);
+
+
 }

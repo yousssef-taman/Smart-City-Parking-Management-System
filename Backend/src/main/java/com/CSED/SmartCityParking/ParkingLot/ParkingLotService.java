@@ -9,24 +9,33 @@ import java.util.Optional;
 @Service
 public class ParkingLotService {
 
-    @Autowired
-    private ParkingLotRepository parkingLotRepository;
+    private final ParkingLotRepository parkingLotRepository;
 
+    @Autowired
+    public ParkingLotService(ParkingLotRepository parkingLotRepository) {
+        this.parkingLotRepository = parkingLotRepository;
+    }
 
     public List<ParkingLot> getAllParkingLots() {
         return parkingLotRepository.findAll();
+    }
+
+    public void saveParkingLot(ParkingLot parkingLot) {
+        parkingLotRepository.createLot(parkingLot.getLotName(), parkingLot.getLocation(), parkingLot.getCapacity()
+                , parkingLot.getPricingStructure());
     }
 
     public Optional<ParkingLot> getParkingLotById(Integer id) {
         return parkingLotRepository.findById(id);
     }
 
-    public ParkingLot saveParkingLot(ParkingLot parkingLot) {
-        return parkingLotRepository.save(parkingLot);
-    }
-
     public void deleteParkingLot(Integer id) {
         parkingLotRepository.deleteById(id);
     }
+
+    public List<ParkingLot> searchLot(String location) {
+        return  this.parkingLotRepository.searchLot(location);
+    }
+
 }
 

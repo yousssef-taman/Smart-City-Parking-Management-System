@@ -17,19 +17,8 @@ public class SpotService {
         this.spotRepository = spotRepository;
     }
 
-    public List<Spot> getAllSpots() {
-        return spotRepository.findAll();
-    }
 
-    public Optional<Spot> getSpotById(Integer spotId) {
-        return spotRepository.findById(spotId);
-    }
-
-    public Spot saveSpot(Spot spot) {
-        return spotRepository.save(spot);
-    }
-
-    public void deleteSpot(Integer spotId) {
-        spotRepository.deleteById(spotId);
+    public void saveSpot(Spot spot) {
+        this.spotRepository.createSpot(spot.getLotId() , spot.getStatus() , spot.getType() , spot.getPrice());
     }
 }

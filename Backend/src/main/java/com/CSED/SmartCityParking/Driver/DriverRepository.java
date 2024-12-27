@@ -14,4 +14,5 @@ public interface DriverRepository extends JpaRepository<Driver, Integer> {
 
     @Query(value = "SELECT * FROM reservation WHERE DriverID = :DriverID" , nativeQuery = true)
     List<Reservation> getDriverReservationsByID(@Param("DriverID") Integer DriverID);
+
 }

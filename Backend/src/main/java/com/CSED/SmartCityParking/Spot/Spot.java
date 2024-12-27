@@ -11,21 +11,21 @@ import lombok.Setter;
 public class Spot {
 
     @Id
-    @Column(name = "SpotID")
+    @Column(name = "spot_id")
     private Integer spotId;
 
-    @Column(name = "LotID", nullable = false)
+    @Column(name = "lot_id", nullable = false)
     private Integer lotId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "Status", nullable = false)
+    @Column(name = "status", nullable = false)
     private Status status;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "Type", nullable = false)
+    @Column(name = "type", nullable = false)
     private Type type;
 
-    @Column(name = "Price", nullable = false)
+    @Column(name = "price", nullable = false)
     private Float price;
 
 
