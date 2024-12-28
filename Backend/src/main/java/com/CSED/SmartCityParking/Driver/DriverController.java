@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 
 @RestController
@@ -15,7 +14,6 @@ public class DriverController {
 
     @Autowired
     private DriverServices driverServices;
-
 
     @GetMapping("/reservations/{DriverID}")
     public ResponseEntity<List<Reservation>> getReservations(@PathVariable Integer DriverID) {
@@ -40,7 +38,7 @@ public class DriverController {
     }
 
     @PutMapping("/leavespot")
-    public ResponseEntity<?> leaveSpot(@RequestParam Integer ReservationID){
+    public ResponseEntity<?> leaveSpot(@RequestParam Integer ReservationID) {
         driverServices.checkForPenality(ReservationID);
         return ResponseEntity.ok("Penality has been checked");
     }

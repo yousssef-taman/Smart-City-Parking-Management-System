@@ -4,9 +4,11 @@ import { ParkingLotDetails } from './components/ParkingLotDetails';
 import { initialParkingLots } from '../data/mockData';
 import {Building, Plus} from 'lucide-react';
 import {ParkingLotForm} from "./Components/ParkingLotForm.jsx";
+import {useParkingLotManager} from "../hooks/useParkingLotManager";
 
 export const ParkingLotProfiles = () => {
     const currentUser = JSON.parse(localStorage.getItem('user'));
+    const {createLot , updateLot, deleteLot, createSpots} = useParkingLotManager();
     const [selectedLot, setSelectedLot] = useState(null);
     const [parkingLots, setParkingLots] = useState(initialParkingLots);
 
@@ -31,7 +33,19 @@ export const ParkingLotProfiles = () => {
     console.log(parkingLots);
         console.log(lotData);
         Create(lotData);
+
         setIsCreating(false);
+        const lot = {
+            lotName: lotData.name,
+            location: lotData.location,
+            capacity: lotData.spots.length,
+            pricingStructure: lotData.basePrice,
+            managerId: currentUser.id,
+            startPeekTime: lotData.peakHours.start,
+            endPeekTime: lotData.peakHours.end,
+            priceMultiplier: lotData.peakMultiplier,
+        }
+        createLot(lot,lotData.capacity) ;
     };
     const handleUpdate = (lotData) => {
         Update({ ...lotData, id: editingLot.id });
@@ -61,7 +75,7 @@ export const ParkingLotProfiles = () => {
                         <h1 className="text-3xl font-bold text-gray-900">
                             Parking Lot Management
                         </h1>
-                        {!isCreating && !editingLot && currentUser.role === "Manager" && (
+                        {!isCreating && !editingLot && currentUser.role === "manager" && (
                             <button
                                 onClick={() => setIsCreating(true)}
                                 className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors ml-auto"

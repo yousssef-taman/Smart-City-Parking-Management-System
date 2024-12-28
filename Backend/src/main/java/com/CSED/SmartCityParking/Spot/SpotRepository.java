@@ -14,13 +14,11 @@ public interface SpotRepository  extends JpaRepository<Spot, Integer> {
     @Modifying
     @Transactional
     @Query(
-            value = "INSERT INTO SmartParking.spot(lot_id , status , type , price) VALUES\n" +
-                    "(:lot_id , :status , :type , :price); "
+            value = "INSERT INTO SmartParking.spot(lot_id , status , type) VALUES\n" +
+                    "(:lotID , 2 , :type ); "
             , nativeQuery = true
     )
-    void createSpot(@Param(value = "lot_id")Integer lot_id ,
-                    @Param(value = "status") Spot.Status status,
-                    @Param(value = "type") Spot.Type type ,
-                    @Param(value = "price") Float price
+    void createSpot(@Param(value = "lotID")Integer lotID,
+                    @Param(value = "type") Spot.Type type
                     );
 }

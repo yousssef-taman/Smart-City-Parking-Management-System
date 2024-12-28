@@ -14,7 +14,7 @@ public class Spot {
     @Column(name = "spot_id")
     private Integer spotId;
 
-    @Column(name = "lot_id", nullable = false)
+    @Column(name = "lotId", nullable = false)
     private Integer lotId;
 
     @Enumerated(EnumType.STRING)
@@ -25,19 +25,21 @@ public class Spot {
     @Column(name = "type", nullable = false)
     private Type type;
 
-    @Column(name = "price", nullable = false)
-    private Float price;
+//    @Column(name = "price", nullable = false)
+//    private Float price;
 
 
     public enum Status {
         OCCUPIED,
         AVAILABLE,
-        RESERVED
+        RESERVED ,
+        NULL
     }
 
     public enum Type {
         REGULAR,
         DISABLED,
-        EV
+        EV,
+        NULL
     }
 }

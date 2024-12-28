@@ -18,11 +18,9 @@ public class SpotController {
         this.spotService = spotService;
     }
     @PostMapping("/create")
-    public ResponseEntity<String> createSpot(@RequestBody Spot spot) {
+    public ResponseEntity<String> createSpot(@RequestBody Spot spot , @RequestParam(value = "capacity")Integer capacity) {
         try {
-            System.out.println(spot.getStatus());
-            System.out.println(spot.getType());
-            spotService.saveSpot(spot) ;
+            spotService.saveSpot(spot, capacity);
             return ResponseEntity.status(HttpStatus.CREATED).body("Spot created successfully.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());

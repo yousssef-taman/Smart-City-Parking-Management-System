@@ -31,7 +31,7 @@ export function ReservationList({ reservations, onApprove, onReject }) {
                         <ReservationStatusBadge status={reservation.status} />
                     </div>
 
-                    {reservation.status === 'pending' && currentUser.role === 'Manager' && (
+                    {reservation.status === 'pending' && currentUser.role === 'manager' && (
                         <div className="flex space-x-3">
                             <button
                                 onClick={() => onApprove(reservation.id)}
