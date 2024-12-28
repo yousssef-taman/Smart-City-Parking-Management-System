@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`reservation` (
   `reservation_status` ENUM("Accepted", "Rejected", "Pending") NOT NULL,
   `reservation_hours` INT NOT NULL,
   `reservation_time` DATETIME NOT NULL,
+  `reservation_fee`  float,
   PRIMARY KEY (`id`),
   CONSTRAINT `Spot`
     FOREIGN KEY (`spot_id`)
