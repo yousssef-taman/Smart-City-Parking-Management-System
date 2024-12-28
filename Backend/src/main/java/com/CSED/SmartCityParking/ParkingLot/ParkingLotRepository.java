@@ -17,7 +17,7 @@ public interface ParkingLotRepository extends JpaRepository<ParkingLot, Integer>
     @Transactional
     @Query(
             nativeQuery = true,
-            value = "INSERT INTO SmartParking.parkinglot(LotName, location, capacity,pricingStructure,ManagerID, startPeekTime , endPeekTime , priceMultiplier) " +
+            value = "INSERT INTO SmartParking.parking_lot(lot_name, location, capacity, pricing_structure, manager_id, start_peek_time , end_peek_time , price_multiplier) " +
                     "VALUES(:lotName, :location, :capacity, :pricing ,:managerId ,:startPeekTime , :endPeekTime , :pricingMultiplier)"
     )
     void createLot(@Param("lotName") String lotName,
@@ -31,7 +31,7 @@ public interface ParkingLotRepository extends JpaRepository<ParkingLot, Integer>
 
 
                    @Query(
-                           value = "SELECT * FROM SmartParking.parkinglot  WHERE SmartParking.parking_lot.location LIKE :location",
+                           value = "SELECT * FROM SmartParking.parking_lot  WHERE SmartParking.parking_lot.location LIKE :location",
                            nativeQuery = true
                    )
                    List<ParkingLot> searchLot(@Param("location") String location);

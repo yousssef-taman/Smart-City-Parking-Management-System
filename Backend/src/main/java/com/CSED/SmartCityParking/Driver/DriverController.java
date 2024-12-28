@@ -31,4 +31,10 @@ public class DriverController {
         Reservation createdReservation = driverServices.reserveDriverSpot(reservation);
         return new ResponseEntity<>(reservation, HttpStatus.CREATED);
     }
+
+    @PostMapping("/leavespot")
+    public ResponseEntity<?> leaveSpot(@RequestBody Integer DriverID, @RequestBody Integer ReservationID) {
+//        driverServices.checkForPenality(DriverID, ReservationID);
+        return ResponseEntity.ok("Penality has been checked");
+    }
 }
