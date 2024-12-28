@@ -26,8 +26,12 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`users` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `role` ENUM("admin", "driver", "manager") NOT NULL,
-  PRIMARY KEY (`id`) )
-  ;
+  PRIMARY KEY (`id`),
+  INDEX `idx_email` (`email`), -- Index for faster lookup by email
+  INDEX `idx_user_name` (`user_name`), -- Index for faster lookup by user_name
+  INDEX `idx_role` (`role`) -- Index for faster filtering by role
+  )
+  ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -41,7 +45,9 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`driver` (
     FOREIGN KEY (`id`)
     REFERENCES `SmartParking`.`users` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+    INDEX `idx_license_id` (`license`, `id`)
+    )
 ENGINE = InnoDB;
 
 
@@ -63,7 +69,15 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`parking_lot` (
     FOREIGN KEY (`manager_id`)
     REFERENCES `SmartParking`.`users` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+    INDEX `idx_manager_id` (`manager_id`), -- Index for manager_id for faster lookups
+  INDEX `idx_lot_name` (`lot_name`), -- Index for lot_name for faster filtering
+  INDEX `idx_location` (`location`), -- Index for location for faster filtering
+  INDEX `idx_capacity` (`capacity`), -- Index for capacity for faster sorting or filtering
+  INDEX `idx_pricing_structure` (`pricing_structure`), -- Index for pricing_structure for faster filtering
+  INDEX `idx_manager_lot_name` (`manager_id`, `lot_name`), -- Composite index for manager_id and lot_name
+  INDEX `idx_manager_location` (`manager_id`, `location`) -- Composite index for manager_id and location
+  )
 ENGINE = InnoDB;
 
 
@@ -80,7 +94,13 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`spot` (
     FOREIGN KEY (`lot_id`)
     REFERENCES `SmartParking`.`parking_lot` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+    INDEX `idx_lot_id` (`lot_id`), -- Index for lot_id for faster lookup
+  INDEX `idx_status` (`status`), -- Index for status for faster filtering
+  INDEX `idx_type` (`type`), -- Index for type if frequently used for filtering
+  INDEX `idx_lot_status` (`lot_id`, `status`), -- Composite index for lot_id and status
+  INDEX `idx_lot_type` (`lot_id`, `type`) -- Composite index for lot_id and type)
+  )
 ENGINE = InnoDB;
 
 
@@ -111,7 +131,14 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`reservation` (
     FOREIGN KEY (`driver_id`)
     REFERENCES `SmartParking`.`driver` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+    INDEX `idx_spot_id` (`spot_id`), -- Index for faster lookup by spot_id
+  INDEX `idx_lot_id` (`lot_id`), -- Index for faster lookup by lot_id
+  INDEX `idx_driver_id` (`driver_id`), -- Index for faster lookup by driver_id
+  INDEX `idx_reservation_status` (`reservation_status`), -- Index for faster filtering by reservation status
+  INDEX `idx_reservation_time` (`reservation_time`), -- Index for faster sorting or filtering by reservation time
+  INDEX `idx_spot_reservation_time` (`spot_id`, `reservation_time`) -- Composite index for faster lookup by spot_id and reservation_time
+  )
 ENGINE = InnoDB;
 
 
@@ -126,7 +153,9 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`penalities` (
     FOREIGN KEY (`reservation_id`)
     REFERENCES `SmartParking`.`reservation` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+     INDEX `idx_reservation_id` (`reservation_id`) -- Explicit index on reservation_id
+     )
 ENGINE = InnoDB;
 
 
