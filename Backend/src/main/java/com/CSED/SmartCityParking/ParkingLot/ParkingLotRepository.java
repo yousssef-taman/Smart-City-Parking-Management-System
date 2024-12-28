@@ -39,5 +39,8 @@ public interface ParkingLotRepository extends JpaRepository<ParkingLot, Integer>
     @Query(value = "SELECT LAST_INSERT_ID()", nativeQuery = true)
     Integer getLastInsertId();
 
+    @Query(value = "SELECT * FROM SmartParking.parking_lot ", nativeQuery = true)
+    List<ParkingLot> getAllParkingLots();
+
 
 }
