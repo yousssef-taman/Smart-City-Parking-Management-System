@@ -17,7 +17,7 @@ public class ParkingLotService {
     }
 
     public List<ParkingLot> getAllParkingLots() {
-        return parkingLotRepository.findAll();
+        return parkingLotRepository.getAllParkingLots();
     }
 
     public Integer saveParkingLot(ParkingLot parkingLot) {

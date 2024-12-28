@@ -1,10 +1,9 @@
 import {Building2, Car, Edit2, MapPin, Trash2, Zap} from 'lucide-react';
 
 export function ParkingLotCard({ parkingLot, onSelect, onUpdate, onDelete  }) {
-    const availableSpots = parkingLot.spots.filter(spot => spot.status === 'available').length;
     const currentHour = new Date().getHours();
-    const isPeakHour = currentHour >= parkingLot.peakHours.start && currentHour <= parkingLot.peakHours.end;
-    const currentPrice = isPeakHour ? parkingLot.basePrice * parkingLot.peakMultiplier : parkingLot.basePrice;
+    const isPeakHour = currentHour >= parkingLot.startPeekTime && currentHour <= parkingLot.endPeekTime;
+    const currentPrice = isPeakHour ? parkingLot.pricingStructure * parkingLot.priceMultiplier : parkingLot.pricingStructure;
     const currentUser = JSON.parse(localStorage.getItem('user'));
 
     return (
@@ -13,7 +12,7 @@ export function ParkingLotCard({ parkingLot, onSelect, onUpdate, onDelete  }) {
                 <div>
                     <div className={"flex gap-2"}>
                         <Building2 className="w-6 h-6 text-blue-600"/>
-                        <h3 className="text-xl font-semibold text-gray-900">{parkingLot.name}</h3>
+                        <h3 className="text-xl font-semibold text-gray-900">{parkingLot.lotName}</h3>
                     </div>
                     <div className="flex items-center text-gray-600 mt-1">
                         <MapPin className="w-4 h-4 mr-1"/>
@@ -69,7 +68,7 @@ export function ParkingLotCard({ parkingLot, onSelect, onUpdate, onDelete  }) {
                     )}
                 </div>
                 <div className="text-right">
-                    <div className="text-sm font-medium text-gray-900">{availableSpots} spots</div>
+                    <div className="text-sm font-medium text-gray-900">{parkingLot.capacity} spots</div>
                     <div className="text-xs text-gray-500">available</div>
                 </div>
             </div>

@@ -61,5 +61,16 @@ export function useParkingLotManager() {
         }
     };
 
-    return { createLot, updateLot, deleteLot,createSpots };
+    const getAllLots = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/api/parkinglots');
+            if (!response.ok) throw new Error('Failed to fetch parking lots');
+            return await response.json();
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+    }
+
+    return { createLot, updateLot, deleteLot,createSpots,getAllLots};
 }

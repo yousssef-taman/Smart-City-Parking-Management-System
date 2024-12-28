@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "INSERT INTO users (username, password, email , role) VALUES (:username, :password, :email , :role)", nativeQuery = true)
+    @Query(value = "INSERT INTO users (user_name, password, email , role) VALUES (:username, :password, :email , :role)", nativeQuery = true)
     @Modifying
     @Transactional
     void createUser(@Param("username") String username,
@@ -22,11 +22,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
                     @Param("role") String role);
 
 
-    @Query(value = "SELECT users.id ,username , `password` , email , `role` , license FROM users left join driver on users.id = driver.id ", nativeQuery = true)
+    @Query(value = "SELECT users.id ,user_name , `password` , email , `role` , license FROM users left join driver on users.id = driver.id ", nativeQuery = true)
     List<UserAndDriver> findAllUsers();
 
 
-    @Query(value = "UPDATE users SET username = :username, password = :password, email = :email , role = :role WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE users SET user_name = :user_name, password = :password, email = :email , role = :role WHERE id = :id", nativeQuery = true)
     @Modifying
     @Transactional
     void updateUser(@Param("id") Long id,
@@ -57,7 +57,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     String findDriverByID(@Param("id") Long id);
 
 
-    @Query(value = "SELECT users.id,username , `password` , email , `role` , license FROM users left join driver on users.id = driver.id " +
+    @Query(value = "SELECT users.id,user_name , `password` , email , `role` , license FROM users left join driver on users.id = driver.id " +
             "where users.id = :id;", nativeQuery = true)
     UserAndDriver findUserAndDriverByID(@Param("id") Long id);
 

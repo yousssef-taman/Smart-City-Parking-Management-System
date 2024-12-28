@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoginRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT users.id ,username , `password` , email , `role` , license FROM users left join driver on users.id = driver.id " +
+    @Query(value = "SELECT users.id ,user_name , `password` , email , `role` , license FROM users left join driver on users.id = driver.id " +
             "where users.username = :username;", nativeQuery = true)
     UserAndDriver findUserAndDriverByUserName(@Param("username") String username);
 
-    @Query(value = "SELECT users.id ,username , `password` , email , `role` , license FROM users left join driver on users.id = driver.id " +
+    @Query(value = "SELECT users.id ,user_name , `password` , email , `role` , license FROM users left join driver on users.id = driver.id " +
             "where users.email = :email;", nativeQuery = true)
     UserAndDriver findUserAndDriverByEmail(@Param("email") String email);
 }

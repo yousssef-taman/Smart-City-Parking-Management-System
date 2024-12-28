@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { ParkingLotCard } from './components/ParkingLotCard';
 import { ParkingLotDetails } from './components/ParkingLotDetails';
 import { initialParkingLots } from '../data/mockData';
@@ -8,13 +8,17 @@ import {useParkingLotManager} from "../hooks/useParkingLotManager";
 
 export const ParkingLotProfiles = () => {
     const currentUser = JSON.parse(localStorage.getItem('user'));
-    const {createLot , updateLot, deleteLot, createSpots} = useParkingLotManager();
+    const {createLot , updateLot, deleteLot, createSpots ,getAllLots} = useParkingLotManager();
     const [selectedLot, setSelectedLot] = useState(null);
-    const [parkingLots, setParkingLots] = useState(initialParkingLots);
+    const [parkingLots, setParkingLots] = useState([]);
 
     const [isCreating, setIsCreating] = useState(false);
     const [editingLot, setEditingLot] = useState(null);
 
+    // get all parking lots
+    useEffect(() => {
+        getAllLots().then(data => setParkingLots(data));
+    }, []);
 
     const onDeleteLot = (lotId) => {
         setParkingLots(parkingLots.filter(lot => lot.id!== lotId));
@@ -31,7 +35,6 @@ export const ParkingLotProfiles = () => {
     }
     const handleCreate = (lotData) => {
     console.log(parkingLots);
-        console.log(lotData);
         Create(lotData);
 
         setIsCreating(false);
