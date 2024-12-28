@@ -31,6 +31,7 @@ public class ParkingLotController {
 
     @PostMapping
     public Integer createParkingLot(@RequestBody ParkingLot parkingLot) {
+        System.out.println(parkingLot.getLotName());
          return parkingLotService.saveParkingLot(parkingLot);
     }
 

@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`Users` (
   `password` VARCHAR(255) NOT NULL,
   `role` ENUM("admin", "driver", "manager") NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `userName_UNIQUE` (`userName` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `userName_UNIQUE` (`userName` ASC) ,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) )
 ENGINE = InnoDB;
 
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`Driver` (
   `License` VARCHAR(20) NOT NULL,
   `id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `License_UNIQUE` (`License` ASC) VISIBLE,
+  UNIQUE INDEX `License_UNIQUE` (`License` ASC) ,
   CONSTRAINT `id`
     FOREIGN KEY (`id`)
     REFERENCES `SmartParking`.`Users` (`id`)
@@ -54,16 +54,18 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`ParkingLot` (
   `LotName` VARCHAR(45) NOT NULL,
   `Location` VARCHAR(255) NOT NULL,
   `capacity` INT NOT NULL,
-  `pricingStructure` INT NOT NULL,
+  `pricingStructure` DOUBLE NOT NULL,
+  `startPeekTime` INT NOT NULL,
+  `endPeekTime` INT NOT NULL,
+  `priceMultiplier` DOUBLE NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `ManagerLotID_idx` (`ManagerID` ASC) VISIBLE,
+  INDEX `ManagerLotID_idx` (`ManagerID` ASC) ,
   CONSTRAINT `ManagerLotID`
     FOREIGN KEY (`ManagerID`)
     REFERENCES `SmartParking`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `SmartParking`.`Spot`
@@ -73,7 +75,6 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`Spot` (
   `SpotID` INT NOT NULL AUTO_INCREMENT,
   `Status` ENUM("occupied", "available", "reserved") NOT NULL,
   `type` ENUM("regular", "disabled", "EV") NOT NULL,
-  `Price` FLOAT NOT NULL,
   PRIMARY KEY (`SpotID`, `LotID`),
   CONSTRAINT `LotID`
     FOREIGN KEY (`LotID`)
@@ -95,9 +96,9 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`Reservation` (
   `ReservationHours` INT NOT NULL,
   `ReservationTime` DATETIME NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `Spot_idx` (`SpotID` ASC) VISIBLE,
-  INDEX `Lot_idx` (`LotID` ASC) VISIBLE,
-  INDEX `Driver_idx` (`DriverID` ASC) VISIBLE,
+  INDEX `Spot_idx` (`SpotID` ASC) ,
+  INDEX `Lot_idx` (`LotID` ASC) ,
+  INDEX `Driver_idx` (`DriverID` ASC) ,
   CONSTRAINT `Spot`
     FOREIGN KEY (`SpotID`)
     REFERENCES `SmartParking`.`Spot` (`SpotID`)
@@ -129,7 +130,6 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`Penalities` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -8,7 +8,7 @@ import {useParkingLotManager} from "../hooks/useParkingLotManager";
 
 export const ParkingLotProfiles = () => {
     const currentUser = JSON.parse(localStorage.getItem('user'));
-    const {createLot , updateLot, deleteLot} = useParkingLotManager();
+    const {createLot , updateLot, deleteLot, createSpots} = useParkingLotManager();
     const [selectedLot, setSelectedLot] = useState(null);
     const [parkingLots, setParkingLots] = useState(initialParkingLots);
 
@@ -41,17 +41,11 @@ export const ParkingLotProfiles = () => {
             capacity: lotData.spots.length,
             pricingStructure: lotData.basePrice,
             managerId: currentUser.id,
-            startPeakTime: lotData.peakHours.start,
-            endPeakTime: lotData.peakHours.end,
-            peakMultiplier: lotData.peakMultiplier,
+            startPeekTime: lotData.peakHours.start,
+            endPeekTime: lotData.peakHours.end,
+            priceMultiplier: lotData.peakMultiplier,
         }
-        lotid = createLot(lot);
-        const regularSpots = {
-            lot_id: lotid,
-            type: 1,
-        }
-        console.log(lot);
-        createLot(lot);
+        createLot(lot,lotData.capacity) ;
     };
     const handleUpdate = (lotData) => {
         Update({ ...lotData, id: editingLot.id });

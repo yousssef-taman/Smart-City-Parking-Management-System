@@ -1,6 +1,6 @@
 
 export function useParkingLotManager() {
-    const createLot = async (lotData) => {
+    const createLot = async (lotData,capacity) => {
         try {
             const response = await fetch('http://localhost:8080/api/parkinglots', {
                 method: 'POST',
@@ -8,9 +8,10 @@ export function useParkingLotManager() {
                 body: JSON.stringify(lotData),
             });
             if (!response.ok) throw new Error('Failed to create parking lot');
-            data = JSON.parse(response.body);
-            console.log(data);
-            console.log(typeof data);
+            const data = await response.json();
+            createSpots({lotId: data, type: 1,}, capacity.regular);
+            createSpots({lotId: data, type: 2,}, capacity.disabled);
+            createSpots({lotId: data, type: 3,}, capacity.ev)
             return data;
         } catch (err) {
             console.error(err);
@@ -45,5 +46,20 @@ export function useParkingLotManager() {
         }
     };
 
-    return { createLot, updateLot, deleteLot };
+    const createSpots = async (spot, capacity) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/spot/create?capacity=${capacity}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(spot),
+            });
+            if (!response.ok) throw new Error('Failed to create spots');
+
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+    };
+
+    return { createLot, updateLot, deleteLot,createSpots };
 }

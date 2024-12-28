@@ -14,7 +14,7 @@ public class Spot {
     @Column(name = "spot_id")
     private Integer spotId;
 
-    @Column(name = "lot_id", nullable = false)
+    @Column(name = "lotId", nullable = false)
     private Integer lotId;
 
     @Enumerated(EnumType.STRING)
