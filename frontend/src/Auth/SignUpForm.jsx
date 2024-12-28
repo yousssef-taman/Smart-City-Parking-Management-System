@@ -10,7 +10,7 @@ export default function SignUpForm() {
         email: '',
         password: '',
         username: '',
-        role: 'Driver',
+        role: 'driver',
         license: '',
     });
     const [error, setError] = useState('');
@@ -112,9 +112,9 @@ export default function SignUpForm() {
                         value={formData.role}
                         onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                     >
-                        <option value="Driver">Driver</option>
-                        <option value="Manager">Parking Lot Manager</option>
-                        <option value="Admin">Administrator</option>
+                        <option value="driver">Driver</option>
+                        <option value="manager">Parking Lot Manager</option>
+                        <option value="admin">Administrator</option>
                     </select>
                 </div>
                 <div>

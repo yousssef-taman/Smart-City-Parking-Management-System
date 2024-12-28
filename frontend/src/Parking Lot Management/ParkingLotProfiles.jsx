@@ -1,23 +1,29 @@
 import React, { useState,useEffect } from 'react';
 import { ParkingLotCard } from './components/ParkingLotCard';
 import { ParkingLotDetails } from './components/ParkingLotDetails';
-import { initialParkingLots } from '../data/mockData';
 import {Building, Plus} from 'lucide-react';
 import {ParkingLotForm} from "./Components/ParkingLotForm.jsx";
 import {useParkingLotManager} from "../hooks/useParkingLotManager";
 
 export const ParkingLotProfiles = () => {
     const currentUser = JSON.parse(localStorage.getItem('user'));
-    const {createLot , updateLot, deleteLot, createSpots ,getAllLots} = useParkingLotManager();
+    const {createLot , updateLot, deleteLot, createSpots ,getAllLots,getSpots,getLotsByManagerId} = useParkingLotManager();
     const [selectedLot, setSelectedLot] = useState(null);
     const [parkingLots, setParkingLots] = useState([]);
+    const [spots, setSpots] = useState([]);
 
     const [isCreating, setIsCreating] = useState(false);
     const [editingLot, setEditingLot] = useState(null);
 
     // get all parking lots
     useEffect(() => {
-        getAllLots().then(data => setParkingLots(data));
+        if(currentUser.role === "manager") {
+            getLotsByManagerId(currentUser.id).then(data => setParkingLots(data));
+        }
+        else {
+            getAllLots().then(data => setParkingLots(data));
+        }
+
     }, []);
 
     const onDeleteLot = (lotId) => {
@@ -26,6 +32,10 @@ export const ParkingLotProfiles = () => {
     const onUpdateLot = (lotData) => {
         setEditingLot(lotData);
     }
+    const onSelectedLot = (lotData) => {
+        setSelectedLot(lotData);
+        getSpotsByLotId(lotData.id);
+    }
     const Update = (lotData) => {
         setParkingLots(parkingLots.map(lot => (lot.id === lotData.id ? lotData : lot)));
     }
@@ -33,9 +43,24 @@ export const ParkingLotProfiles = () => {
     const Create = (lotData) => {
         setParkingLots([...parkingLots, { ...lotData, id: parkingLots.length + 1 }]);
     }
+    const getSpotsByLotId = (lotId) => {
+        getSpots(lotId).then(data => {
+            const spots = data.map((spot,index) => ({
+                    id: index,
+                    spotId: spot.spotId,
+                    type: spot.type.toLowerCase(),
+                    status: spot.status.toLowerCase(),
+                    floor: Math.floor(index / 20) + 1,
+                    spotNumber: `${Math.floor(index / 20) + 1}-${(index % 20) + 1}`,
+            }
+            ));
+            setSpots(spots);
+        })
+    }
+
+
+
     const handleCreate = (lotData) => {
-    console.log(parkingLots);
-        Create(lotData);
 
         setIsCreating(false);
         const lot = {
@@ -48,6 +73,7 @@ export const ParkingLotProfiles = () => {
             endPeekTime: lotData.peakHours.end,
             priceMultiplier: lotData.peakMultiplier,
         }
+        Create(lot);
         createLot(lot,lotData.capacity) ;
     };
     const handleUpdate = (lotData) => {
@@ -112,6 +138,7 @@ export const ParkingLotProfiles = () => {
                         onBack={() => setSelectedLot(null)}
                         updateSpotStatus={updateSpotStatus}
                         userRole={currentUser.role}
+                        spots={spots}
                     />
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -119,7 +146,7 @@ export const ParkingLotProfiles = () => {
                             <ParkingLotCard
                                 key={lot.id}
                                 parkingLot={lot}
-                                onSelect={setSelectedLot}
+                                onSelect={onSelectedLot}
                                 onUpdate={onUpdateLot}
                                 onDelete={onDeleteLot}
                             />
