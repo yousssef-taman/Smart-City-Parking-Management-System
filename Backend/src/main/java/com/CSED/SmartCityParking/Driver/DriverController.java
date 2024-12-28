@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/driver")
@@ -18,7 +17,7 @@ public class DriverController {
     private DriverServices driverServices;
 
 
-    @GetMapping("/{DriverID}")
+    @GetMapping("/reservations/{DriverID}")
     public ResponseEntity<List<Reservation>> getReservations(@PathVariable Integer DriverID) {
         List<Reservation> reservations = driverServices.getDriverReservations(DriverID);
         return reservations.isEmpty()
@@ -30,5 +29,19 @@ public class DriverController {
     public ResponseEntity<Reservation> reserveSpot(@RequestBody Reservation reservation) {
         Reservation createdReservation = driverServices.reserveDriverSpot(reservation);
         return new ResponseEntity<>(reservation, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/penalities/{DriverID}")
+    public ResponseEntity<List<Penalities>> getPenalties(@PathVariable Integer DriverID) {
+        List<Penalities> penalties = driverServices.getPenaltiesByDriverID(DriverID);
+        return penalties.isEmpty()
+                ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(penalties, HttpStatus.OK);
+    }
+
+    @PutMapping("/leavespot")
+    public ResponseEntity<?> leaveSpot(@RequestParam Integer ReservationID){
+        driverServices.checkForPenality(ReservationID);
+        return ResponseEntity.ok("Penality has been checked");
     }
 }

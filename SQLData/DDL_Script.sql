@@ -50,15 +50,15 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SmartParking`.`ParkingLot` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `ManagerID` INT NULL,
-  `LotName` VARCHAR(45) NOT NULL,
-  `Location` VARCHAR(255) NOT NULL,
+  `managerid` INT NULL,
+  `lotname` VARCHAR(45) NOT NULL,
+  `location` VARCHAR(255) NOT NULL,
   `capacity` INT NOT NULL,
-  `pricingStructure` INT NOT NULL,
+  `pricingstructure` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `ManagerLotID_idx` (`ManagerID` ASC) VISIBLE,
+  INDEX `ManagerLotID_idx` (`managerid` ASC) VISIBLE,
   CONSTRAINT `ManagerLotID`
-    FOREIGN KEY (`ManagerID`)
+    FOREIGN KEY (`managerid`)
     REFERENCES `SmartParking`.`Users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -87,29 +87,29 @@ ENGINE = InnoDB;
 -- Table `SmartParking`.`Reservation`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SmartParking`.`Reservation` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `SpotID` INT NOT NULL,
-  `LotID` INT NOT NULL,
-  `DriverID` INT NOT NULL,
-  `ReservationStatus` ENUM("Accepted", "Rejected") NOT NULL,
-  `ReservationHours` INT NOT NULL,
-  `ReservationTime` DATETIME NOT NULL,
-  PRIMARY KEY (`ID`),
-  INDEX `Spot_idx` (`SpotID` ASC) VISIBLE,
-  INDEX `Lot_idx` (`LotID` ASC) VISIBLE,
-  INDEX `Driver_idx` (`DriverID` ASC) VISIBLE,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `spotid` INT NOT NULL,
+  `lotid` INT NOT NULL,
+  `driverid` INT NOT NULL,
+  `reservationstatus` ENUM("ACCEPTED", "PENDING", "REJECTED") NOT NULL,
+  `reservationhours` INT NOT NULL,
+  `reservationtime` DATETIME NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `Spot_idx` (`spotid` ASC) VISIBLE,
+  INDEX `Lot_idx` (`lotid` ASC) VISIBLE,
+  INDEX `Driver_idx` (`driverid` ASC) VISIBLE,
   CONSTRAINT `Spot`
-    FOREIGN KEY (`SpotID`)
+    FOREIGN KEY (`spotid`)
     REFERENCES `SmartParking`.`Spot` (`SpotID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Lot`
-    FOREIGN KEY (`LotID`)
+    FOREIGN KEY (`lotid`)
     REFERENCES `SmartParking`.`ParkingLot` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Driver`
-    FOREIGN KEY (`DriverID`)
+    FOREIGN KEY (`driverid`)
     REFERENCES `SmartParking`.`Driver` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `SmartParking`.`Penalities` (
   PRIMARY KEY (`ReservationID`),
   CONSTRAINT `ReservationID`
     FOREIGN KEY (`ReservationID`)
-    REFERENCES `SmartParking`.`Reservation` (`ID`)
+    REFERENCES `SmartParking`.`Reservation` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
