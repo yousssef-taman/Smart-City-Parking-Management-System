@@ -1,6 +1,7 @@
 package com.CSED.SmartCityParking.Driver;
 
 import com.CSED.SmartCityParking.Reservation.Reservation;
+import com.CSED.SmartCityParking.Spot.Spot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +25,13 @@ public class DriverController {
     }
 
     @PostMapping("/reserve")
-    public ResponseEntity<Reservation> reserveSpot(@RequestBody Reservation reservation) {
+    public ResponseEntity<?> reserveSpot(@RequestBody Reservation reservation) {
         Reservation createdReservation = driverServices.reserveDriverSpot(reservation);
-        return new ResponseEntity<>(reservation, HttpStatus.CREATED);
+        if (createdReservation == null) {
+            return new ResponseEntity<>("Invalid reservation details", HttpStatus.BAD_REQUEST);
+        }
+        else
+            return new ResponseEntity<>(reservation, HttpStatus.CREATED);
     }
 
     @GetMapping("/penalities/{DriverID}")

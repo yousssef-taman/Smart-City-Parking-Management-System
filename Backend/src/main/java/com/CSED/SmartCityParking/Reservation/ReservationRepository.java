@@ -1,6 +1,7 @@
 package com.CSED.SmartCityParking.Reservation;
 
 import com.CSED.SmartCityParking.Enums.ReservationStatus;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,15 +16,17 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
 
-    @Query(value = "INSERT INTO reservation (SpotID, LotID, DriverID, ReservationStatus, ReservationHours, ReservationTime) " +
-            "VALUES (:spotId, :lotId, :driverId, :reservationStatus, :reservationHours, :reservationTime)", nativeQuery = true)
+    @Query(value = "INSERT INTO reservation (spot_id, lot_id, driver_id , reservation_status, reservation_hours, reservation_time , reservation_fee) " +
+            "VALUES (:spotId, :lotId, :driverId, :reservationStatus, :reservationHours, :reservationTime, :spotPrice)", nativeQuery = true)
     @Modifying
+    @Transactional
     void reserveSpot(@Param("spotId") Integer spotId,
                      @Param("lotId") Integer lotId,
                      @Param("driverId") Integer driverId,
                      @Param("reservationStatus") ReservationStatus reservationStatus,
                      @Param("reservationHours") Integer reservationHours,
-                     @Param("reservationTime") LocalDateTime reservationTime);
+                     @Param("reservationTime") LocalDateTime reservationTime,
+                     @Param("spotPrice") float spotPrice);
 
     @Query(value = "SELECT LAST_INSERT_ID()", nativeQuery = true)
     Integer getLastInsertId();
@@ -47,4 +50,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     Reservation getReservationById(Integer id);
 
 
+    @Query(value = "SELECT * FROM reservation WHERE spot_id = :spotID", nativeQuery = true)
+    List<Reservation> getReservationsBySpotID(@Param("spotID") Integer spotId);
 }

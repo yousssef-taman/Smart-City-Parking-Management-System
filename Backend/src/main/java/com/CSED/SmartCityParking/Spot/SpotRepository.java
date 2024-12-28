@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public interface SpotRepository  extends JpaRepository<Spot, Integer> {
 
@@ -21,4 +22,9 @@ public interface SpotRepository  extends JpaRepository<Spot, Integer> {
     void createSpot(@Param(value = "lotID")Integer lotID,
                     @Param(value = "type") Spot.Type type
                     );
+
+    @Query(value = "UPDATE spot SET status = :status WHERE spot_id = :spotID" , nativeQuery = true)
+    @Modifying
+    @Transactional
+    void UpdateSpotStatus(@Param("spotID") Integer spotID ,@Param("status") Spot.Status status);
 }
