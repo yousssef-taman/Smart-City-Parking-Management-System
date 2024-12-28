@@ -3,23 +3,31 @@ import { ArrowLeft, Car } from 'lucide-react';
 import { ReservationForm } from '../../reservations/ReservationForm';
 import { validateReservation } from '../../utils/reservationRules';
 
-export function ParkingLotDetails({ parkingLot, onBack, userRole }) {
+export function ParkingLotDetails({ parkingLot, onBack, userRole ,spots }) {
     const [selectedSpot, setSelectedSpot] = useState(null);
+    const [selectedSpotId, setSelectedSpotId] = useState(null);
     const [reservationError, setReservationError] = useState('');
 
     const handleReservation = (reservationData) => {
-        const validation = validateReservation(reservationData.startTime, reservationData.duration);
+        const validation = validateReservation(reservationData.reservationTime, reservationData.duration);
 
         if (!validation.valid) {
             setReservationError(validation.message);
             return;
         }
+        setSelectedSpotId(null);
+        setSelectedSpot(null);
 
         // Here you would typically make an API call to create the reservation
         console.log('Creating reservation:', reservationData);
         setReservationError('');
     };
-
+    const onSelect = (spot) => {
+        if (spot.status === 'available') {
+            setSelectedSpot(spot.id);
+            setSelectedSpotId(spot.spotId);
+        }
+    }
     const getSpotColor = (spot) => {
         switch (spot.status) {
             case 'available':
@@ -55,17 +63,17 @@ export function ParkingLotDetails({ parkingLot, onBack, userRole }) {
                         <ArrowLeft className="w-6 h-6" />
                     </button>
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900">{parkingLot.name}</h2>
+                        <h2 className="text-2xl font-bold text-gray-900">{parkingLot.lotName}</h2>
                         <p className="text-gray-600">{parkingLot.location}</p>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-6">
-                    {Array.from({ length: Math.ceil(parkingLot.spots.length / 20) }).map((_, floorIndex) => (
+                    {Array.from({ length: Math.ceil(spots.length / 20) }).map((_, floorIndex) => (
                         <div key={floorIndex} className="border rounded-lg p-4">
                             <h3 className="text-lg font-semibold mb-4">Floor {floorIndex + 1}</h3>
                             <div className="grid grid-cols-10 gap-2">
-                                {parkingLot.spots
+                                {spots
                                     .filter(spot => spot.floor === floorIndex + 1)
                                     .map(spot => (
                                         <div
@@ -74,7 +82,7 @@ export function ParkingLotDetails({ parkingLot, onBack, userRole }) {
                                                 spot
                                             )} flex items-center justify-center text-white cursor-pointer hover:opacity-80 transition-opacity ${selectedSpot === spot.id ? 'ring-4 ring-blue-500' : ''}`}
                                             title={`Spot ${spot.spotNumber} - ${spot.status}`}
-                                            onClick={() => setSelectedSpot(spot.id)}
+                                            onClick={() => onSelect(spot)}
                                         >
                                             <Car className="w-6 h-6" />
                                             {getSpotIcon(spot) && (
@@ -110,7 +118,7 @@ export function ParkingLotDetails({ parkingLot, onBack, userRole }) {
                 </div>
             </div>
 
-            {userRole === 'driver' && selectedSpot && (
+            {userRole === 'driver' && selectedSpotId && (
                 <div className="lg:col-span-1">
                     {reservationError && (
                         <div className="mb-4 p-4 bg-red-100 text-red-700 rounded-lg">
@@ -119,7 +127,7 @@ export function ParkingLotDetails({ parkingLot, onBack, userRole }) {
                     )}
                     <ReservationForm
                         parkingLot={parkingLot}
-                        spotId={selectedSpot}
+                        spotId={selectedSpotId}
                         onReserve={handleReservation}
                     />
                 </div>

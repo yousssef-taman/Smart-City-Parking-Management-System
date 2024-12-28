@@ -1,6 +1,7 @@
 
 export function useAuth() {
     const signUp = async ({ email, password, username, role,license }) => {
+        console.log(role);
         try {
             const body = { username, password ,email, role,license };
             const response = await fetch('http://localhost:8080/api/user', {
@@ -16,6 +17,7 @@ export function useAuth() {
     };
 
     const login = async ({ email, password, role }) => {
+        console.log(role);
         try {
             const body = { email, password, role };
             const response = await fetch('http://localhost:8080/api/login', {

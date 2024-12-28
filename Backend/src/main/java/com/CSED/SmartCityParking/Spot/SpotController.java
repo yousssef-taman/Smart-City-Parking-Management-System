@@ -26,5 +26,10 @@ public class SpotController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         }
     }
+    //get spots by lot id
+    @GetMapping("/{lotId}")
+    public List<Spot> getSpotsByLotId(@PathVariable("lotId") Integer lotId) {
+        return spotService.getSpotsByLotId(lotId);
+    }
 
 }

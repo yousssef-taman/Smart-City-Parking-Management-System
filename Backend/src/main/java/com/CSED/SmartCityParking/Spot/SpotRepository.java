@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface SpotRepository  extends JpaRepository<Spot, Integer> {
 
@@ -21,4 +23,10 @@ public interface SpotRepository  extends JpaRepository<Spot, Integer> {
     void createSpot(@Param(value = "lotID")Integer lotID,
                     @Param(value = "type") Spot.Type type
                     );
+
+    @Query(
+            value = "SELECT * FROM SmartParking.spot WHERE lot_id = :lotId"
+            , nativeQuery = true
+    )
+    List<Spot> getSpotsByLotId(@Param(value = "lotId") Integer lotId);
 }
