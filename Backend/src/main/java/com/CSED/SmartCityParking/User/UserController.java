@@ -1,88 +1,61 @@
 package com.CSED.SmartCityParking.User;
-import com.CSED.SmartCityParking.ParkingLot.ParkingLot;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:5173")
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 public class UserController {
 
+    private final UserService userService;
+
+
     @Autowired
-    private UserServices userServices;
-
-
-    @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody UserAndDriver userAndDriver) {
-        try{
-            UserAndDriver NewUser = userServices.createUser(userAndDriver);
-            return ResponseEntity.ok(NewUser);
-        } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("Constraint violation");
-
-        }
-        catch (IllegalArgumentException e)
-        {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("License can't be null");
-        }
-        catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An unexpected error occurred. Please try again later.");
-        }
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-
-    @GetMapping
-    public ResponseEntity<?> getAllUsers() {
-        List<UserAndDriver>  RetrivedUsers = userServices.getAllUsers();
-        if (RetrivedUsers.isEmpty() ) {
-            return ResponseEntity.noContent().build();
-        }else
-            return ResponseEntity.ok(RetrivedUsers);
+    @PostMapping("register")
+    public ResponseEntity<Integer> createUser(@RequestBody User user) {
+        Integer id = this.userService.createUser(user);
+        if (id == -1) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
+    @GetMapping("all")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Long id) {
-        UserAndDriver RetrivedUser = userServices.getUserById(id);
-         if (RetrivedUser == null) {
-             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-         }
-         else return ResponseEntity.ok(RetrivedUser);
+        List<UserDTO> allUsers = userService.getAllUsers();
+        if (allUsers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserAndDriver> updateUser(@PathVariable Long id, @RequestBody UserAndDriver userDetails) {
-        return ResponseEntity.ok(userServices.updateUser(id, userDetails));
+    public ResponseEntity<Void> updateUser(@PathVariable Integer id , @RequestBody Map<String , Object> attributes) {
+        Boolean updateStatus = this.userService.updateUser(id, attributes);
+        if (updateStatus) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-        UserAndDriver UserDelete = userServices.getUserById(id);
-        if (UserDelete == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
+        Boolean deleteStatus = this.userService.deleteUser(id);
+        if (deleteStatus) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        else userServices.deleteUser(id);
-        return ResponseEntity.ok("User "+id+" deleted successfully!");
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-
-    @GetMapping("searchLot")
-    public ResponseEntity<List<ParkingLot>> getLots(@Param(value = "location") String location) {
-        List<ParkingLot> lots = this.userServices.searchLot(location);
-        if (lots == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(lots, HttpStatus.OK);
-    }
 }
 
