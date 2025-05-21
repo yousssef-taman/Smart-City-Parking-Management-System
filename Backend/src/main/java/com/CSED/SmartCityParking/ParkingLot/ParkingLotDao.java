@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -25,54 +27,52 @@ public class ParkingLotDao {
     }
 
 
+    public ParkingLot rowMapper(ResultSet rs, Integer rowNum) throws SQLException {
+        return new ParkingLot(
+                rs.getInt(1),
+                rs.getInt(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getInt(5)
+        ) ;
+    }
+
     public ParkingLot getLotById(Integer id) {
-        String query = "SELECT * FROM parking_lot WHERE id = ? ; ";
-        return this.jdbcTemplate.queryForObject(query, (rs, rowNum) -> new ParkingLot(
-                rs.getInt(1), rs.getString(1), rs.getString(2), rs.getInt(3),
-                rs.getFloat(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8)
-        ), id);
+        String sql = "SELECT * FROM parking_lot WHERE id = ? ; ";
+        return this.jdbcTemplate.queryForObject(sql, this::rowMapper, id);
 
     }
 
     public List<ParkingLot> getAllLotsByLocation(String location) {
-        String query = "SELECT * FROM parking_lot WHERE location = ?;";
-        return this.jdbcTemplate.query(query, (rs, rowNum) -> new ParkingLot(
-                        rs.getInt(1), rs.getString(1), rs.getString(2), rs.getInt(3),
-                        rs.getFloat(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8)),
-                location);
+        String sql = "SELECT * FROM parking_lot WHERE location = ?;";
+        return this.jdbcTemplate.query(sql, this::rowMapper, location);
     }
 
     public List<ParkingLot> getAllParkingLots() {
-        String query = "SELECT * FROM smartparking.parking_lot;";
-        System.out.println("started");
-        return this.jdbcTemplate.query(query, (rs, rowNum) -> new ParkingLot(
-                rs.getInt(1), rs.getString(1), rs.getString(2), rs.getInt(3),
-                rs.getFloat(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8)));
+        String sql = "SELECT * FROM smartparking.parking_lot;";
+        return this.jdbcTemplate.query(sql, this::rowMapper);
     }
 
     public void deleteLotById(Integer id) {
-        String query = "DELETE FROM parking_lot WHERE id = ?";
-        jdbcTemplate.update(query, id);
+        String sql = "DELETE FROM parking_lot WHERE id = ?";
+        jdbcTemplate.update(sql, id);
     }
 
 
-    public Number saveLot(ParkingLot parkingLot) {
-        String query = "INSERT INTO parking_lot (manager_id, lot_name, capacity, pricing_structure, start_peek_time, end_peek_time, price_multiplier) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public Integer saveLot(ParkingLot parkingLot) {
+        String sql = "INSERT INTO parking_lot (manager_id, lot_name, location , capacity ) VALUES (?,?,?,?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(query, new String[]{"id"});
+            PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, parkingLot.getManagerId());
             ps.setString(2, parkingLot.getLotName());
-            ps.setInt(3, parkingLot.getCapacity());
-            ps.setFloat(4, parkingLot.getPricingStructure());
-            ps.setInt(5, parkingLot.getStartPeekTime());
-            ps.setInt(6, parkingLot.getEndPeekTime());
-            ps.setInt(7, parkingLot.getPriceMultiplier());
+            ps.setString(3, parkingLot.getLocation());
+            ps.setInt(4, parkingLot.getCapacity());
             return ps;
         }, keyHolder);
 
-        return keyHolder.getKey();
+        return keyHolder.getKey()!=null ? keyHolder.getKey().intValue() : -1 ;
     }
 }

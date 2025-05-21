@@ -1,42 +1,65 @@
 package com.CSED.SmartCityParking.ParkingLot;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ParkingLotService {
 
-    private final ParkingLotRepository parkingLotRepository;
-
+    private final ParkingLotDao parkingLotDao ;
     @Autowired
-    public ParkingLotService(ParkingLotRepository parkingLotRepository) {
-        this.parkingLotRepository = parkingLotRepository;
+    public ParkingLotService(ParkingLotDao parkingLotDao) {
+
+        this.parkingLotDao = parkingLotDao;
     }
 
     public List<ParkingLot> getAllParkingLots() {
-        return parkingLotRepository.getAllParkingLots();
+        try {
+          return   this.parkingLotDao.getAllParkingLots();
+        } catch (DataAccessException dataAccessException) {
+            return null  ;
+        }
+    }
+
+    public ParkingLot getParkingLotById(Integer id) {
+
+        try {
+            return this.parkingLotDao.getLotById(id);
+        } catch (DataAccessException dataAccessException) {
+            return null ;
+        }
     }
 
     public Integer saveParkingLot(ParkingLot parkingLot) {
-        parkingLotRepository.createLot(parkingLot.getLotName(), parkingLot.getLocation(), parkingLot.getCapacity()
-                , parkingLot.getPricingStructure(), parkingLot.getManagerId(),
-                parkingLot.getStartPeekTime(), parkingLot.getEndPeekTime(), parkingLot.getPriceMultiplier());
-        return this.parkingLotRepository.getLastInsertId();
+        try {
+            return this.parkingLotDao.saveLot(parkingLot);
+        } catch (DataAccessException dataAccessException) {
+            return -1 ;
+        }
     }
 
-    public Optional<ParkingLot> getParkingLotById(Integer id) {
-        return parkingLotRepository.findById(id);
-    }
 
-    public void deleteParkingLot(Integer id) {
-        parkingLotRepository.deleteById(id);
+
+    public Boolean deleteParkingLot(Integer id) {
+
+        try {
+            this.parkingLotDao.deleteLotById(id);
+            return true ;
+        } catch (DataAccessException dataAccessException) {
+            return false;
+        }
     }
 
     public List<ParkingLot> searchLot(String location) {
-        return  this.parkingLotRepository.searchLot(location);
+        try {
+            return this.parkingLotDao.getAllLotsByLocation(location);
+        } catch (DataAccessException dataAccessException) {
+            return null ;
+        }
+
     }
 
 }
