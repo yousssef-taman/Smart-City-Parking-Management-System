@@ -9,7 +9,7 @@ export default function LoginForm() {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-        role: 'Driver'
+        role: 'driver'
     });
     const [error, setError] = useState('');
 
@@ -77,9 +77,9 @@ export default function LoginForm() {
                         value={formData.role}
                         onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                     >
-                        <option value="Driver">Driver</option>
-                        <option value="Manager">Parking Lot Manager</option>
-                        <option value="Admin">Administrator</option>
+                        <option value="driver">Driver</option>
+                        <option value="manager">Parking Lot Manager</option>
+                        <option value="admin">Administrator</option>
                     </select>
                 </div>
                 <div>

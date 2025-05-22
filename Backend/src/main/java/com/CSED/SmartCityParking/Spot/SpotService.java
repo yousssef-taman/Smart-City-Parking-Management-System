@@ -23,4 +23,8 @@ public class SpotService {
             this.spotRepository.createSpot(spot.getLotId() , spot.getType());
         }
     }
+
+    public List<Spot> getSpotsByLotId(Integer lotId) {
+        return spotRepository.getSpotsByLotId(lotId);
+    }
 }

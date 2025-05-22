@@ -72,5 +72,27 @@ export function useParkingLotManager() {
         }
     }
 
-    return { createLot, updateLot, deleteLot,createSpots,getAllLots};
+    // get lots by manager id
+    const getLotsByManagerId = async (managerId) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/parkinglots/manager/${managerId}`);
+            if (!response.ok) throw new Error('Failed to fetch parking lots');
+            return await response.json();
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+    }
+    const getSpots = async (lotId) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/spot/${lotId}`);
+            if (!response.ok) throw new Error('Failed to fetch spots');
+            return await response.json();
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+    }
+
+    return { createLot, updateLot, deleteLot,createSpots,getAllLots,getSpots,getLotsByManagerId};
 }

@@ -43,4 +43,7 @@ public interface ParkingLotRepository extends JpaRepository<ParkingLot, Integer>
     List<ParkingLot> getAllParkingLots();
 
 
+
+    @Query(value = "SELECT * from parking_lot where id = :parkinglotid" , nativeQuery = true)
+    ParkingLot getLotById(@Param("parkinglotid") Integer parkinglotid);
 }

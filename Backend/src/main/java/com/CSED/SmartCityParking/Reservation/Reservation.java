@@ -34,6 +34,9 @@ public class Reservation {
 
     @Column(name = "reservation_time")
     private LocalDateTime reservationTime;
+
+    @Column(name = "reservation_fee")
+    private float reservation_fee;
 }
 
 
