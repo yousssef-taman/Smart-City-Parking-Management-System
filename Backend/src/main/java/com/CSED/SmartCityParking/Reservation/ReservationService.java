@@ -1,43 +1,57 @@
 package com.CSED.SmartCityParking.Reservation;
 
-import com.CSED.SmartCityParking.Enums.ReservationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ReservationService {
 
-    @Autowired
-    private ReservationRepository reservationRepository;
+    private final ReservationDao reservationDao;
 
-    public List<Reservation> getAllReservations() {
-        return reservationRepository.findAll();
+    @Autowired
+    public ReservationService(ReservationDao reservationDao) {
+        this.reservationDao = reservationDao;
     }
+
+
+
+    public Integer saveReservation(Reservation reservation) {
+        try {
+            return this.reservationDao.createReservation(reservation);
+        } catch (DataAccessException e) {
+            return -1;
+        }
+    }
+
 
     public Reservation getReservationById(Integer id) {
-        return reservationRepository.getReservationById(id);
+        try {
+            return this.reservationDao.getReservationById(id);
+        } catch (DataAccessException dataAccessException) {
+            return null;
+        }
     }
 
-    public Reservation saveReservation(Reservation reservation) {
-        return reservationRepository.save(reservation);
-    }
-
-    public void deleteReservation(Integer id) {
-        reservationRepository.deleteReservationByID(id);
-    }
-
-    public List<Reservation> getAllReservationsByManager(Integer id)
+    public List<Reservation> getAllReservationsByManager(Integer managerID)
     {
-        return reservationRepository.getReservationByManagerID(id);
+        try {
+            return this.reservationDao.getAllReservationsByManagerId(managerID);
+        } catch (DataAccessException dataAccessException) {
+            return null;
+        }
     }
 
-    public Reservation updateReservationStatus(Integer reservationID, ReservationStatus reservationStatus)
-    {
-        reservationRepository.updateReservationStatus(reservationID,reservationStatus);
-         return reservationRepository.getReservationById(reservationID);
+
+    public Boolean deleteReservation(Integer id) {
+        try {
+            this.reservationDao.deleteReservation(id);
+            return true ;
+        } catch (DataAccessException dataAccessException) {
+            return false;
+        }
     }
 }
 
