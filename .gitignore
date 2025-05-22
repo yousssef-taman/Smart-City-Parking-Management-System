@@ -4,4 +4,4 @@ build/
 *.class
 *.log
 iot.py
-
+*.swp
