@@ -33,7 +33,6 @@ public class UserService {
             user.setPassword(this.passwordEncoder.encode(user.getPassword()));
             return this.userDao.addUser(user);
         } catch (DataAccessException dataAccessException) {
-            System.out.println(dataAccessException.toString());
             return -1;
         }
     }
@@ -46,7 +45,6 @@ public class UserService {
             List<UserDTO> userDTOS = users.stream().filter(user -> user.getRole().toString().equals("DRIVER")).map(this.userMapper).toList();
             return userDTOS;
         } catch (DataAccessException dataAccessException ) {
-            System.out.println(dataAccessException.toString());
             return null;
         }
 
@@ -67,7 +65,6 @@ public class UserService {
             }
             return true;
         } catch (DataAccessException dataAccessException) {
-            System.out.println(dataAccessException.toString());
             return false;
         }
     }
